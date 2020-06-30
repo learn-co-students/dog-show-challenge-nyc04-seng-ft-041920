@@ -52,9 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function editBtnEvent(dogObj,dogTRow) {
     const editBtn = dogTRow.querySelector('button')
-    editBtn.addEventListener('click', e => {
-      populateForm(dogObj)
-    })
+    editBtn.addEventListener('click',function _func(){populateForm(dogObj)})
 
   }
 
@@ -74,18 +72,20 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify(dogObj)
       })
       .then( r => r.json())
-      .then(updateDog)
+      .then(dogObj => { 
+        updateDog(dogObj)
+        // form.reset()
+      })
     
   }
 
   function updateDog(dogObj) {
-    
+    // debugger
+    form.reset()
     const updatedDogRow = document.querySelector(`tr[data-id='${dogObj.id}']`)
-    updatedDogRow.querySelector('button').removeEventListener('click', populateForm(dogObj))
-    
+    updatedDogRow.querySelector('button').removeEventListener('click',_func)
     // 2. why does clear form doesnt work other places
     //clear form
-    form.reset()
 
     updatedDogRow.innerHTML = `
       <td>${dogObj.name}</td> 
