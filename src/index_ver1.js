@@ -46,17 +46,21 @@ document.addEventListener('DOMContentLoaded', () => {
         <button>Edit</button>
       </td>
     `
-    editBtnEvent(dogObj,dogTRow)
-    tableBody.append(dogTRow)
-  }
-
-  function editBtnEvent(dogObj,dogTRow) {
+    // editBtnEvent(dogObj,dogTRow)
     const editBtn = dogTRow.querySelector('button')
     editBtn.addEventListener('click', e => {
       populateForm(dogObj)
     })
-
+    tableBody.append(dogTRow)
   }
+
+  // function editBtnEvent(dogObj,dogTRow) {
+  //   const editBtn = dogTRow.querySelector('button')
+  //   editBtn.addEventListener('click', e => {
+  //     populateForm(dogObj)
+  //   })
+
+  // }
 
   function populateForm(dogObj) {
     form.name.value = dogObj.name
@@ -78,15 +82,14 @@ document.addEventListener('DOMContentLoaded', () => {
     
   }
 
+
+
+  //after updating why does not chagned value get nested in
+  //<font style="vertical-align: inherit;">/font>
+
   function updateDog(dogObj) {
     
     const updatedDogRow = document.querySelector(`tr[data-id='${dogObj.id}']`)
-    updatedDogRow.querySelector('button').removeEventListener('click', populateForm(dogObj))
-    
-    // 2. why does clear form doesnt work other places
-    //clear form
-    form.reset()
-
     updatedDogRow.innerHTML = `
       <td>${dogObj.name}</td> 
       <td>${dogObj.breed}</td> 
@@ -95,7 +98,10 @@ document.addEventListener('DOMContentLoaded', () => {
         <button>Edit</button>
       </td>
     `
-    editBtnEvent(dogObj,updatedDogRow)
+    const editBtn = dogTRow.querySelector('button')
+    editBtn.addEventListener('click', e => {
+      populateForm(dogObj)
+    })
     
   }
 
