@@ -84,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
     form.reset()
     const updatedDogRow = document.querySelector(`tr[data-id='${dogObj.id}']`)
     updatedDogRow.querySelector('button').removeEventListener('click',_func)
-    // 2. why does clear form doesnt work other places
     //clear form
 
     updatedDogRow.innerHTML = `
