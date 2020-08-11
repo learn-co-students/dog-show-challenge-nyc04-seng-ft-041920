@@ -46,15 +46,21 @@ document.addEventListener('DOMContentLoaded', () => {
         <button>Edit</button>
       </td>
     `
-    editBtnEvent(dogObj,dogTRow)
+    // editBtnEvent(dogObj,dogTRow)
+    const editBtn = dogTRow.querySelector('button')
+    editBtn.addEventListener('click', e => {
+      populateForm(dogObj)
+    })
     tableBody.append(dogTRow)
   }
 
-  function editBtnEvent(dogObj,dogTRow) {
-    const editBtn = dogTRow.querySelector('button')
-    editBtn.addEventListener('click',function _func(){populateForm(dogObj)})
+  // function editBtnEvent(dogObj,dogTRow) {
+  //   const editBtn = dogTRow.querySelector('button')
+  //   editBtn.addEventListener('click', e => {
+  //     populateForm(dogObj)
+  //   })
 
-  }
+  // }
 
   function populateForm(dogObj) {
     form.name.value = dogObj.name
@@ -72,20 +78,18 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify(dogObj)
       })
       .then( r => r.json())
-      .then(dogObj => { 
-        updateDog(dogObj)
-        // form.reset()
-      })
+      .then(updateDog)
     
   }
 
-  function updateDog(dogObj) {
-    // debugger
-    form.reset()
-    const updatedDogRow = document.querySelector(`tr[data-id='${dogObj.id}']`)
-    updatedDogRow.querySelector('button').removeEventListener('click',_func)
-    //clear form
 
+
+  //after updating why does not chagned value get nested in
+  //<font style="vertical-align: inherit;">/font>
+
+  function updateDog(dogObj) {
+    
+    const updatedDogRow = document.querySelector(`tr[data-id='${dogObj.id}']`)
     updatedDogRow.innerHTML = `
       <td>${dogObj.name}</td> 
       <td>${dogObj.breed}</td> 
@@ -94,7 +98,10 @@ document.addEventListener('DOMContentLoaded', () => {
         <button>Edit</button>
       </td>
     `
-    editBtnEvent(dogObj,updatedDogRow)
+    const editBtn = dogTRow.querySelector('button')
+    editBtn.addEventListener('click', e => {
+      populateForm(dogObj)
+    })
     
   }
 
